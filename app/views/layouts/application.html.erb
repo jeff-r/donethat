@@ -8,7 +8,33 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="container_12">
+    <div class="grid_12" id="header">
+    </div>
+    <div class="clear"></div>
+
+    <div class="grid_10">
+      <div id='content'>
+      <% if flash[:notice] %>
+        <p><%= flash[:notice] %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+    </div>
+
+    <div class="grid_2">
+      <div id='nav'>
+        <%= link_to "Projects", projects_path %>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+  </div>
+
+
+
 
 </body>
 </html>
+

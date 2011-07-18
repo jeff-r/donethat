@@ -2,3 +2,9 @@
 db/*.sqlite3
 log/*.log
 tmp/
+omniauth.rb
+Capfile
+config/deploy.rb
+deploy_password
+deploy_username
+

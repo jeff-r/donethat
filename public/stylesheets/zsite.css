@@ -1,0 +1,69 @@
+/* This is the only css file I'm modifying.
+ * I've named it zsite.css so that it
+ * comes last alphabetically, so it is the
+ * last to be applied, and it overrides all
+ * other styles.
+ */
+body {
+  background-color: #1c0d08;
+  padding-top: 20px;
+}
+
+.container_12 {
+}
+
+#content {
+  background-color: #ffffe3;
+  padding: 8px;
+}
+
+#nav {
+  background-color: #b8b48d;
+  background-color: #d9d2c1;
+  padding: 8px;
+}
+
+#header {
+  background-color: #40413c;
+}
+
+h1 {
+  color: #40413c;
+  font-size: 120%;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+
+a:hover {
+  color: black;
+  background-color: #ffffe3;
+}
+
+#nav a {
+  display:block;
+  text-align: right;
+}
+#nav a:hover {
+  display:block;
+  text-align: right;
+  background-color: #b8b48d;
+}
+
+.field label {
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+}
+
+table.project_table {
+  border: solid 1px #555;
+}
+table.project_table td,
+table.project_table th {
+  text-align: left;
+  padding-left: 8px;
+  padding-right: 8px;
+}
