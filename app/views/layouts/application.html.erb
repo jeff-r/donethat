@@ -25,6 +25,8 @@
     <div class="grid_2">
       <div id='nav'>
         <%= link_to "Projects", projects_path %>
+        <%= link_to "Sign in", new_user_session_path %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
       </div>
     </div>
 
