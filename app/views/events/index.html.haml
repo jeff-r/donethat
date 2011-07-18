@@ -1,0 +1,17 @@
+%h1 Events
+
+%table
+  %tr
+    %th File
+    %th time
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= link_to event.file, event
+      %td= event.event_time
+      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Event', new_event_path
