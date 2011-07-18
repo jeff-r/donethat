@@ -18,6 +18,7 @@ body {
 }
 
 #nav {
+  text-align: right;
   background-color: #b8b48d;
   background-color: #d9d2c1;
   padding: 8px;
@@ -44,7 +45,6 @@ a:hover {
 
 #nav a {
   display:block;
-  text-align: right;
 }
 #nav a:hover {
   display:block;

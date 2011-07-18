@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /projects
   # GET /projects.xml
   def index
@@ -15,6 +17,9 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
 
+    puts "*******"
+    puts @project.inspect
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }
@@ -25,6 +30,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @project.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb

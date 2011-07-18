@@ -6,11 +6,9 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :user_id, { :value => @project.user.id }
   .field
     = f.label :name
     = f.text_field :name
-  .field
-    = f.label :userid
-    = f.text_field :userid
   .actions
     = f.submit 'Save'

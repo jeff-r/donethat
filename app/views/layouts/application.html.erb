@@ -15,6 +15,9 @@
 
     <div class="grid_10">
       <div id='content'>
+      <% if flash[:alert] %>
+        <p><%= flash[:alert] %></p>
+      <% end %>
       <% if flash[:notice] %>
         <p><%= flash[:notice] %></p>
       <% end %>
@@ -23,11 +26,20 @@
     </div>
 
     <div class="grid_2">
-      <div id='nav'>
-        <%= link_to "Projects", projects_path %>
-        <%= link_to "Sign in", new_user_session_path %>
-        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      </div>
+      <% if user_signed_in? %>
+        <div id='nav'>
+          <%= link_to "Projects", projects_path %>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <p>
+           <%= current_user.email %>
+           </p>
+        </div>
+      <% else %>
+        <div id='nav'>
+          <%= link_to "Projects", projects_path %>
+          <%= link_to "Sign in", new_user_session_path %>
+        </div>
+      <% end %>
     </div>
 
     <div class="clear"></div>
