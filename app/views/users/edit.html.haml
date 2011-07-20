@@ -1,0 +1,23 @@
+%p
+  Account preferences for
+  = @user.email
+
+
+%p
+  = form_for @user do |f|
+    .field
+      = f.label :email
+      = f.text_field :email
+    .field
+      = f.label :current_project_id
+      = f.text_field :current_project_id
+
+    .field
+      = f.label :secret_token
+      = f.text_field :secret_token
+
+    .actions
+      = f.submit 'Save'
+      = f.submit 'Cancel'
+
+

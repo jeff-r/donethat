@@ -1,9 +1,7 @@
 Donethat::Application.routes.draw do
-  resources :events
-
   devise_for :users
 
-  resources :projects
+  resources :events, :projects, :users
 
   root :to => "projects#index"
 

@@ -38,22 +38,74 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  # POST /events
-  # POST /events.xml
+  # fomat for "when":
+  # yy-mm-dd hh:mm
+  # with hh running from 0 to 23
+  # str = DateTime.now.strftime("%y-%m-%e %H:%M")
+  # newdate = DateTime.strptime(str, "%y-%m-%e %H:%M")
+  #
+  # To create a record, the user must be signed in --
+  # or a unique password must be provided.
   def create
-    @event = Event.new(params[:event])
-    @projects = current_user.projects
+    puts "*************"
+    puts params.inspect
+
+    if params[:event].key?(:pass)
+      password = params[:event][:pass]
+      user = User.find_by_hashed_secret(password)
+      puts "user: #{user.inspect}"
+    else
+      # verify_signed_in
+      user = current_user
+    end
+
+    @event = Event.new
+    @event[:file] = params[:event][:file]
+    # @event[:event_time] = params[:event][:event_time]
+    @event.formatted_time = params[:event][:event_time]
+
+    if @event.project.nil?
+      if user.current_project.nil?
+        puts "No current project. Redirecting."
+        redirect_to :projects, :notice => "Sorry, you need a current project."
+        return
+      end
+      @event.project = user.current_project
+    end
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
-        format.xml  { render :xml => @event, :status => :created, :location => @event }
+    puts
+    puts "*****************"
+    puts @event.inspect
+        format.html { redirect_to @event.project, :notice => "Event saved" }
+        format.json { render :json => { :saved => "true" } }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+        format.html { redirect_to :new_event, :notice => "Event not saved" }
+        format.json { render :json => { :saved => "false" } }
       end
     end
   end
+
+
+
+
+  # POST /events
+  # POST /events.xml
+  # def create
+  #   @event = Event.new(params[:event])
+  #   @projects = current_user.projects
+
+  #   respond_to do |format|
+  #     if @event.save
+  #       format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+  #       format.xml  { render :xml => @event, :status => :created, :location => @event }
+  #     else
+  #       format.html { render :action => "new" }
+  #       format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PUT /events/1
   # PUT /events/1.xml
